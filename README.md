@@ -11,7 +11,7 @@ It's a playground and it will be a work in progress.
 
 ## Documentation
 
-There are *two* types of tags, *blocks* and *variables*.
+There are two types of tags, `blocks` and `variables`.
 
 ### Variables
 
@@ -21,7 +21,7 @@ There are *two* types of tags, *blocks* and *variables*.
 
 ### Blocks
 
-There are *three* types of blocks – `if`, `each` and `call`.
+There are three types of blocks – `if`, `each` and `call`.
 
 #### Loops
 
@@ -46,5 +46,30 @@ attributes. To access attributes of the parent context use `..`. For example:
 
 #### Conditionals
 
+Supported operators are: `>, >=, <, <=, ==, !=`. You can also use conditionals
+with things that evaluate to truth.
+
+```html
+{% if num > 5 %}
+    <div>more</div>
+{% else %}
+    <div>less or equal</div>
+{% endif %}
+
+{% if items %}
+    <div>we have items</div>
+{% endif %}
+```
 
 #### Callables
+
+Callables can get passed positional or keyword arguments.
+
+```html
+<div class='date'>{% call prettify date_created %}</div>
+<div>{% call log 'here' verbosity='debug' %}</div>
+```
+
+## Benchmarks
+
+TODO

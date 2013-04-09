@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>microtemplates templates benchmark</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="alekos">
+    <link href="/css/my.css" type="text/css" rel="stylesheet">
+    <link href="/css/really.css" type="text/css" rel="stylesheet">
+    <link href="/css/good.css" type="text/css" rel="stylesheet">
+    <link href="/css/styles.css" type="text/css" rel="stylesheet">
+  </head>
+  <body>
+    <div id="wrapper">
+      <h1>{{title}}</h1>
+      <h2>todos-orama</h2>
+      <div id="content">
+        {% each todos %}
+          <div class="todo {% if it.done %}done{% endif%}">
+            <div class="title">{{it.title}}</div>
+            <div class="description">{{it.description}}</div>
+            {% if it.followers %}
+              <div class="followers">
+                {% each it.followers %}
+                  <span class="follower">{{it}}</span>
+                {% endeach %}
+              </div>
+            {% endif %}
+          </div>
+        {% endeach %}
+      </div>
+    </dov>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/scripts.js"></script>
+  </body>
+</html>

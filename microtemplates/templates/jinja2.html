@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>jinja2 template benchmark</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="alekos">
+    <link href="/css/my.css" type="text/css" rel="stylesheet">
+    <link href="/css/really.css" type="text/css" rel="stylesheet">
+    <link href="/css/good.css" type="text/css" rel="stylesheet">
+    <link href="/css/styles.css" type="text/css" rel="stylesheet">
+  </head>
+  <body>
+    <div id="wrapper">
+      <h1>{{title}}</h1>
+      <h2>todos-orama</h2>
+      <div id="content">
+        {% for todo in todos %}
+          <div class="todo {% if todo.done %}done{% endif%}">
+            <div class="title">{{todo.title}}</div>
+            <div class="description">{{todo.description}}</div>
+            {% if todo.followers %}
+              <div class="followers">
+                {% for follower in todo.followers %}
+                  <span class="follower">{{follower}}</span>
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </dov>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/scripts.js"></script>
+  </body>
+</html>

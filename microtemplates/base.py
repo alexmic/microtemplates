@@ -78,11 +78,9 @@ class _Fragment(object):
         self.clean = self.clean_fragment()
 
     def clean_fragment(self):
-        clean = self.raw.strip()
-        raw_start = self.raw[:2]
-        if raw_start in (VAR_TOKEN_START, BLOCK_TOKEN_START):
-            clean = clean[2:-2].strip()
-        return clean
+        if self.raw[:2] in (VAR_TOKEN_START, BLOCK_TOKEN_START):
+            return self.raw.strip()[2:-2].strip()
+        return self.raw
 
     @property
     def type(self):
@@ -148,7 +146,7 @@ class _Each(_ScopableNode):
             raise TemplateSyntaxError(fragment)
 
     def render(self, context):
-        items = self.it[1] if self.it[0] == 'literal' else context[self.it[1]]
+        items = self.it[1] if self.it[0] == 'literal' else resolve(self.it[1], context)
         def render_item(item):
             return self.render_children({'..': context, 'it': item})
         return ''.join(map(render_item, items))

@@ -287,7 +287,7 @@ class Compiler(object):
             elif cmd == 'call':
                 node_class = _Call
         if node_class is None:
-            raise Exception('wtf?')
+            raise TemplateSyntaxError(fragment)
         return node_class(fragment.clean)
 
 

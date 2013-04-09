@@ -41,11 +41,11 @@ def benchmark_jinja2():
 
 
 if __name__ == '__main__':
-        number = 1000
-        engines = ('microtemplates', 'django', 'jinja2')
-        setup = "from __main__ import %s" % ', '.join(map(lambda t: 'benchmark_' + t, engines))
-        for engine in engines:
-            t = timeit.Timer("benchmark_%s()" % engine, setup=setup)
-            time = t.timeit(number=number) / number
-            print "%s => run %s times, took %.2f ms" % (engine, number, 1000 * time)
+    number = 1000
+    engines = ('microtemplates', 'django', 'jinja2')
+    setup = "from __main__ import %s" % ', '.join(map(lambda t: 'benchmark_' + t, engines))
+    for engine in engines:
+        t = timeit.Timer("benchmark_%s()" % engine, setup=setup)
+        time = t.timeit(number=number) / number
+        print "%s => run %s times, took %.2f ms" % (engine, number, 1000 * time)
 

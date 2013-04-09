@@ -28,11 +28,11 @@ There are three types of blocks – `if`, `each` and `call`.
 ```html
 {% each items %}
     <div>{{it}}</div>
-{% endeach %}
+{% end %}
 
 {% each [1,2,3] %}
     <div>{{it}}</div>
-{% endeach %}
+{% end %}
 ```
 
 `it` references the current item in the iteration and it is scoped to this item's
@@ -41,7 +41,7 @@ attributes. To access attributes of the parent context use `..`. For example:
 ```html
 {% each items %}
     <div>{{..name}}</div><div>{{it}}</div>
-{% endeach %}
+{% end %}
 ```
 
 #### Conditionals
@@ -54,11 +54,11 @@ with things that evaluate to truth.
     <div>more</div>
 {% else %}
     <div>less or equal</div>
-{% endif %}
+{% end %}
 
 {% if items %}
     <div>we have items</div>
-{% endif %}
+{% end %}
 ```
 
 #### Callables

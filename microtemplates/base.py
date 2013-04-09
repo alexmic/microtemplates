@@ -60,14 +60,16 @@ def eval_expression(expr):
         return 'name', expr
 
 
-def resolve(value, context):
-    if value.startswith('..'):
+def resolve(name, context):
+    if name.startswith('..'):
         context = context.get('..', {})
-        value = value[2:]
-    if value in context:
-        return context[value]
-    else:
-        raise TemplateContextError(value)
+        name = name[2:]
+    try:
+        for tok in name.split('.'):
+            context = context[tok]
+        return context
+    except KeyError:
+        raise TemplateContextError(name)
 
 
 class _Fragment(object):
@@ -298,27 +300,3 @@ class Template(object):
 
     def render(self, **kwargs):
         return self.root.render(kwargs)
-
-
-if __name__ == '__main__':
-    print 'loops'
-    print '====='
-    print Template('<div>{% each items %}<div>{{it}}</div>{% endeach %}</div>').render(items=['alex', 'maria'])
-    print Template('<div>{% each [1, 2, 3] %}<div>{{it}}</div>{% endeach %}</div>').render()
-    print Template('<div>{% each [1, 2, 3] %}<div>{{..name}}-{{it}}</div>{% endeach %}</div>').render(name='jon doe')
-    print
-    print 'conditionals'
-    print '============'
-    print Template('<div>{% if a > 5 %}bigger than 5{% else %}less than 5{% endif %}</div>').render(a=4)
-    print Template('<div>{% if a > 5 %}bigger than 5{% else %}less than 5{% endif %}</div>').render(a=6)
-    print Template('<div>{% if should_loop %}{% each [1, 2] %}<i>{{it}}</i>{% endeach %}{% endif %}</div>').render(should_loop=True)
-    print
-    print 'callables'
-    print '========='
-    def pow(*args):
-        return reduce(lambda a, b: a ** b, args)
-    def cube_if_no_exp(mantissa, exp=3):
-        return mantissa ** exp
-    print Template('<div>{% call pow 2 2 3 4 %}</div>').render(exp=10, pow=pow)
-    print Template('<div>{% call pow 2 exp=5 %}</div>').render(pow=cube_if_no_exp)
-    print Template('<div>{% call pow 2 %}</div>').render(pow=cube_if_no_exp)

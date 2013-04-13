@@ -75,7 +75,10 @@ Callables can get passed positional or keyword arguments.
 Using `benchmarks.py` and the templates files in `templates/` here are the results:
 
 ```
-microtemplates => run 1000 times, took 0.58 ms
-django => run 1000 times, took 1.39 ms
-jinja2 => run 1000 times, took 7.68 ms
+microtemplates => run 10000 times, took 0.36 ms
+django => run 10000 times, took 0.95 ms
+django_default_loader => run 10000 times, took 1.16 ms
+django_cached_loader => run 10000 times, took 0.46 ms
+jinja2 => run 10000 times, took 5.64 ms
+jinja2_env => run 10000 times, took 0.08 ms
 ```
